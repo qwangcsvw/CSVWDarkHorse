@@ -45,18 +45,28 @@ Zhang Fei       68    65       30
 """
 
 for course in ['Chinses', 'Math', 'English']:
-    df_course = df_score.loc[:, [course]]
-    courseMean = df_course.mean().loc[course]
-    courseMin = df_course.min().loc[course]
-    courseMax = df_course.max().loc[course]
-    courseVar = df_course.var().loc[course]
-    courceStd = df_course.std().loc[course]
-    course = Course(course, courseMean, courseMin, courseMax, courseVar, courceStd)
-    print(course)
+    df_course = df_score[course].agg(['mean', 'min', 'max', 'var', 'std'])
+    print(df_course)
+
 """
-Course(Course='Chinses', Mean=86.2, Min=68, Max=98, Var=150.2, Std=12.255610959882823)
-Course(Course='Math', Mean=81.0, Min=65, Max=90, Var=109.0, Std=10.44030650891055)
-Course(Course='English', Mean=76.6, Min=30, Max=98, Var=734.8, Std=27.10719461692781)
+mean     86.200000
+min      68.000000
+max      98.000000
+var     150.200000
+std      12.255611
+Name: Chinses, dtype: float64
+mean     81.000000
+min      65.000000
+max      90.000000
+var     109.000000
+std      10.440307
+Name: Math, dtype: float64
+mean     76.600000
+min      30.000000
+max      98.000000
+var     734.800000
+std      27.107195
+Name: English, dtype: float64
 """
 
 # 2. 然后把这些人的总成绩排序，得出名次进行成绩输出（可以用numpy或pandas）
